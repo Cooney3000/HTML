@@ -1,59 +1,79 @@
-const spieler = {
-  'Norbrt': {rank: 1,  mp: 0, diff: 0, results: []},
-  'ConnyR': {rank: 2,  mp: 0, diff: 0, results: []},
-  'MarkuS': {rank: 3,  mp: 0, diff: 0, results: []},
-  'MarkuT': {rank: 4,  mp: 0, diff: 0, results: []},
-  'Marcus': {rank: 5,  mp: 0, diff: 0, results: []},
-  'BenniL': {rank: 6,  mp: 0, diff: 0, results: []},
-  'Stefan': {rank: 7,  mp: 0, diff: 0, results: []},
-  'Tschou': {rank: 8,  mp: 0, diff: 0, results: []},
-  'Schmid': {rank: 9,  mp: 0, diff: 0, results: []},
-  'RalfKu': {rank: 10, mp: 0, diff: 0, results: []},
-  'AndiHe': {rank: 11, mp: 0, diff: 0, results: []},
-  'Thomas': {rank: 12, mp: 0, diff: 0, results: []},
-};
+// Befuellung
 
+// const spieler = { 
+//   'Norbrt': {rank: 1,  mp: 0, diff: 0, results: []},
+//   'ConnyR': {rank: 2,  mp: 0, diff: 0, results: []},
+//   'MarkuS': {rank: 3,  mp: 0, diff: 0, results: []},
+//   'MarkuT': {rank: 4,  mp: 0, diff: 0, results: []},
+//   'Marcus': {rank: 5,  mp: 0, diff: 0, results: []},
+//   'BenniL': {rank: 6,  mp: 0, diff: 0, results: []},
+//   'Stefan': {rank: 7,  mp: 0, diff: 0, results: []},
+//   'Tschou': {rank: 8,  mp: 0, diff: 0, results: []},
+//   'Schmid': {rank: 9,  mp: 0, diff: 0, results: []},
+//   'RalfKu': {rank: 10, mp: 0, diff: 0, results: []},
+//   'AndiHe': {rank: 11, mp: 0, diff: 0, results: []},
+//   'Thomas': {rank: 12, mp: 0, diff: 0, results: []},
+// };
+// for (var sp in spieler) { 
+//   for (var ge in spieler) {  
+//     spieler[sp].results.push({gegner: ge, matches: 0, won: 0, loss: 0});
+//   }
+// }
+
+// In dieser Variante ist die Reihenfolge auch der Rank
+const spieler = [ 
+  {name: 'Norbrt', mp: 0, diff: 0, results: []},
+  {name: 'ConnyR', mp: 0, diff: 0, results: []},
+  {name: 'MarkuS', mp: 0, diff: 0, results: []},
+  {name: 'MarkuT', mp: 0, diff: 0, results: []},
+  {name: 'Marcus', mp: 0, diff: 0, results: []},
+  {name: 'BenniL', mp: 0, diff: 0, results: []},
+  {name: 'Stefan', mp: 0, diff: 0, results: []},
+  {name: 'Tschou', mp: 0, diff: 0, results: []},
+  {name: 'Schmid', mp: 0, diff: 0, results: []},
+  {name: 'RalfKu', mp: 0, diff: 0, results: []},
+  {name: 'AndiHe', mp: 0, diff: 0, results: []},
+  {name: 'Thomas', mp: 0, diff: 0, results: []},
+];
 for (var sp in spieler) { 
   for (var ge in spieler) {  
-    spieler[sp].results.push({gegner: ge, matches: 0, won: 0, loss: 0});
+    if (spieler[sp].name != spieler[ge].name) {
+      spieler[sp].results.push({gegner: spieler[ge].name, matches: 0, won: 0, loss: 0});
+    }
   }
 }
 
+//
 // Runde 1
+const runde = [];
 
-// Für die Gegnersuche brauchen wir ein Array statt ein Objekt
-const spielerArr = [];
 for (let sp in spieler) {
-  spielerArr.push({name: sp, results: spieler[sp].results});
+  
+  let geFound = false;
+  for (let ge in spieler[sp].results) {
+    
+    if (spieler[sp].results[ge].matches == 0) {
+      runde.push({spieler: spieler[sp].name, gegner: spieler[sp].results[ge].gegner});
+      // Eintrag bei Spieler und Gegner
+      addMatch(spieler[sp].name, spieler[sp].results[ge].gegner);
+      geFound = true;
+      break;
+    }
+  
+  }
+
 }
 
+function addMatch(name1, name2) {
+  // Beim Spieler eintragen
+  let sp = spieler.map(e => e.name).indexOf(name1);
+  let begegnung = spieler[sp].results.map(e => e.gegner).indexOf(name2);
+  spieler[sp].results[begegnung].matches++;
+  // Beim Gegner eintragen
+  sp = spieler.map(e => e.name).indexOf(name2);
+  begegnung = spieler[sp].results.map(e => e.gegner).indexOf(name1);
+  spieler[sp].results[begegnung].matches++;
+} 
 
-const runde1 = [];
-let i = 0;
-sp = 0;
-findeNaechstenGegner(sp);
 
-console.log(spieler);
 
-//--------------------------------------------------------------------
-function findeNaechstenGegner(sp) {
-  if (spielerArr[sp].name === spielerArr[sp].results[i].gegner) {
-    i++;
-  }
-  if (i >= spielerArr.length || sp >= spielerArr.length) {
-    return false;
-  }
-  if (spielerArr[sp].results[i].matches === 0) {
-    runde1.push({spieler: spielerArr[sp].name, gegner: spielerArr[sp].results[i].gegner});
-    spielerArr[sp].results[i].matches++;
-    spielerArr[i].results[sp].matches++;
-    spieler[spielerArr[sp].name].results[i].matches++;
-    spieler[spielerArr[sp].results[i].gegner].results[sp].matches++;
-    sp++;
-    i = 0;
-    findeNaechstenGegner(sp);
-  } else {
-    i++;
-    findeNaechstenGegner(sp);
-  }
-}
