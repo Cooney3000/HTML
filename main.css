@@ -1,69 +1,99 @@
-body
-{
-	border-top:5px solid #3cb371;
-	font-family:'Open Sans', sans-serif;
-  color:#222222;
-  background-image:url(../images/tco-background.png);
+:root {
+	--viertel: 10px;
+	--schriftgroesse: 0.7rem;
 }
-header {
-  width:100%;
-  padding :10px;
+.table td, .table th {
+	padding: 0;
+	margin: 0;
 }
-header h1
-{
-	float:right;
-	height:auto;
-	color:white;
-	font-weight:bold;
-	font-style:italic;
-	text-shadow: 0.03em 0.03em #333;
-	font-family:'PT Sans', sans-serif;
-	text-align: right;
+.viertelstunde {
+	font-size: calc(var(--schriftgroesse)*0.7);
+	border-top: 1px solid gray;
+	border-bottom: 1px solid white;
+	height: var(--viertel);
+	top: -0px;
+	width: 2rem;
 }
-h1, h2, h3, h4, h5, h6 {
-	font-weight: bold;
+.zeitleiste {
+	position: relative;
+	width: 2rem;
 }
-.tcosection {
-	/* border-top:5px solid #3cb371; */
-	border-bottom:0.1rem solid #3cb371;
+.platzDim {
+	height: calc(var(--viertel)*50);
+	border: 1px solid black;
 }
-.nav-link
-{
-	text-decoration:none;
-	text-transform:uppercase;
-	color:#222222;
-	transition:all .25s ease;
+.platz {
+	position: relative;
+}
+.ts {
+	font-size: var(--schriftgroesse);
+	border: 1px solid white;
+	width: 100%;
+	display:block;
+	overflow: hidden;
+	position: absolute;
 }
 
-.sponsor
-{
-	float:left;
-	width:200px;
-	height:160px;
-	background-color:white; 
-  margin: 0.1rem 0.1rem 0.1rem 0.1rem;
+.D-15 {
+	background-color: darkblue;
+	color: beige;
+	height: calc(var(--viertel)*1);
 }
-.sponsor img
-{
-  width:180px;
+.D-30 {
+	background-color: darkgreen;
+	color: beige;
+	height: calc(var(--viertel)*2);
 }
-@media (min-width: 504px) {
-  header h1 {
-    font-size: 1.5rem;
-  }
+.D-60 {
+	background-color: rgb(0, 71, 0);
+	color: beige;
+	height: calc(var(--viertel)*4);
 }
-@media (min-width: 560px) {
-  header h1 {
-    font-size: 2rem;
-  }
+.D-90 {
+	background-color: rgb(105, 0, 9);
+	color: beige;
+	height: calc(var(--viertel*6));
 }
-@media (min-width: 768px) {
-  header h1 {
-    font-size: 3rem;
-  }
+.D-120 {
+	background-color: black;
+	color: beige;
+	height: calc(var(--viertel)*8);
 }
-@media (min-width: 1200px) {
-  header h1 {
-    font-size: 4rem;
-  }
+.T-08-00 {
+	top: 0px;
 }
+.T-08-15 {
+	top: calc(var(--viertel)*1);
+}
+.T-08-30 {
+	top: calc(var(--viertel)*2);
+}
+.T-08-45 {
+	top: calc(var(--viertel)*3);
+}
+.T-09-00 {
+	top: calc(var(--viertel)*4);
+}
+.T-09-15 {
+	top: calc(var(--viertel)*5);
+}
+.T-09-30 {
+	top: calc(var(--viertel)*6);
+}
+.T-09-45 {
+	top: calc(var(--viertel)*7);
+}
+
+.T-10-00 {
+	top: calc(var(--viertel)*8);
+}.T-11-00 {
+	top: calc(var(--viertel)*12);
+}
+.T-12-00 {
+	top: calc(var(--viertel)*16);
+}
+
+.T-15-00 {
+	top: calc(var(--viertel)*28);
+}
+
