@@ -1,25 +1,5 @@
 // Befuellung
 
-// const spieler = { 
-//   'Norbrt': {rank: 1,  mp: 0, diff: 0, results: []},
-//   'ConnyR': {rank: 2,  mp: 0, diff: 0, results: []},
-//   'MarkuS': {rank: 3,  mp: 0, diff: 0, results: []},
-//   'MarkuT': {rank: 4,  mp: 0, diff: 0, results: []},
-//   'Marcus': {rank: 5,  mp: 0, diff: 0, results: []},
-//   'BenniL': {rank: 6,  mp: 0, diff: 0, results: []},
-//   'Stefan': {rank: 7,  mp: 0, diff: 0, results: []},
-//   'Tschou': {rank: 8,  mp: 0, diff: 0, results: []},
-//   'Schmid': {rank: 9,  mp: 0, diff: 0, results: []},
-//   'RalfKu': {rank: 10, mp: 0, diff: 0, results: []},
-//   'AndiHe': {rank: 11, mp: 0, diff: 0, results: []},
-//   'Thomas': {rank: 12, mp: 0, diff: 0, results: []},
-// };
-// for (var sp in spieler) { 
-//   for (var ge in spieler) {  
-//     spieler[sp].results.push({gegner: ge, matches: 0, won: 0, loss: 0});
-//   }
-// }
-
 // In dieser Variante ist die Reihenfolge auch der Rank
 const spieler = [ 
   {name: 'Norbrt', mp: 0, diff: 0, results: []},
@@ -52,12 +32,19 @@ for (let sp in spieler) {
   let geFound = false;
   for (let ge in spieler[sp].results) {
     
-    if (spieler[sp].results[ge].matches == 0) {
-      runde.push({spieler: spieler[sp].name, gegner: spieler[sp].results[ge].gegner});
+    // Gibt es die Begegnung in dieser Runde bereits?
+    //let neueBegegnung = runde.map(e => (e.spieler === spName && e.gegner === geName) || (e.spieler === geName && e.gegner === spName)).length == 0
+    
+    if ( /*neueBegegnung && */  (spieler[sp].results[ge].matches == 0)) {
+      let spName = spieler[sp].name;
+      let geName = spieler[sp].results[ge].gegner;
+      
+      runde.push({spieler: spName, gegner: geName});
       // Eintrag bei Spieler und Gegner
-      addMatch(spieler[sp].name, spieler[sp].results[ge].gegner);
+      addMatch(spName, geName);
       geFound = true;
       break;
+
     }
   
   }
