@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Page Title</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<script>
+
+
+  //const url = "http://localhost/api/api.php/records/bookings?filter=starts_at,ge,2018-12-27&filter=ends_at,lt,2018-12-28&order=starts_at";
+const url = "http://tcolching.de/api/api.php/records/bookings?filter=starts_at,ge,2018-12-27&filter=ends_at,lt,2018-12-28&order=starts_at";
+
+var data = 'LEER';
+var erfolg = false;
+
+fetch(url)
+  .then(result => result.json()) 
+  .then(result => {
+      data = result.records;
+      erfolg = true;
+  })
+  .catch(function(err) {
+    console.log(err)
+  });  
+
+var t=0;
+var intervall = 10;
+var mt = setInterval(myTimer, intervall);
+
+function myTimer() {
+  t += intervall;
+  console.log(t);
+  if (erfolg) {
+    clearInterval(mt);
+    console.log(data);
+  }
+  if (t > 10000) {
+    console.log ('Abbruch nach 10 Sekunden');
+    clearInterval(mt)
+  }
+}
+
+
+</script>
+</body>
+</html>
