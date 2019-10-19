@@ -1,55 +1,779 @@
-<!DOCTYPE html>
-<html>
+<html lang="de">
+
 <head>
-	<meta charset="utf-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>TCO</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" type="text/css" href="main.css" />
+    <meta charset="utf-8">
+    <link rel="shortcut icon" href="/intern/tafel/favicon-32x32.png">
+    <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+    <meta name="theme-color" content="#000000">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,600|PT+Sans:700italic">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="manifest" href="/intern/tafel/manifest.json">
+    <title>TCO-Turnierplaner</title>
+    <link href="/intern/tafel/static/css/main.c169464e.chunk.css" rel="stylesheet">
+    <link href="tafel.css" rel="stylesheet">
 </head>
+
 <body>
-	<div id="blatt1">
-		<section id="willkommen" class="seite">
-			<h2>Herzlich willkommen beim TC Olching!</h2>
-			<article class="spalte1">    
-				<p>Wir freuen uns, dass du den Weg auf unsere Homepage gefunden hast.
-						Hier wollen wir dir Informationen rund um den TC Olching wie die laufende Saison, Angebote, Termine und 
-						aktuelle Ereignisse, Ansprechpartner und alles, was von Interesse für die Mitglieder und Freunde des 
-						TC Olching ist, anbieten.</p>
-				<p>Der TC Olching beim Bayerischen Tennisverband: <br></p>
-				<table>
-					<tr>
-						<td>Vereinsseite:</td><td><a href="http://www.btv.de/BTVToServe/abaxx-?$part=Vereine.content.clubDaten.clubInfo&clubId=02262&$event=displayClubInfoFromMap&prevPath=Vereine.content.promoboxes.googleMaps&singleClub=false&clubStatus=200">Link</a></td>
-					</tr>
-					<tr>
-						<td>Mannschaften:</td><td><a href="mannschaften.php">Link</a></td>
-					</tr>
-					<tr>
-						<td>Mannschaftsbegegnungen:</td><td><a href="http://www.btv.de/BTVToServe/abaxx-?searchTimeRange=1&searchType=1&searchTimeRangeFrom=1.5.2016&searchTimeRangeTo=31.7.2061&club=02262&federation=BTV&%24part=Vereine.content.clubDaten.clubInfoRouter&theLeaguePage=b2sClubMeetings&searchMeetings=Suchen">Link</a></td>
-					</tr>
-					<tr>
-						<td>Namentliche Meldungen (bitte dort die richtige Spielklasse wählen):</td><td><a href="http://www.btv.de/BTVToServe/abaxx-?$part=Vereine.index.menu&docPath=/BTV-Portal/Vereine/Meldungen&nodeSel=4&docId=1034504">Link</a></td>
-					</tr>
-				</table>
-			</article>
-			<h3>Unsere Jugend-Sponsoren</h3	>
-			<article id="sponsoren">
-				<div class="sponsor">  
-					<a href="http://www.keller-rolladen.de/"><img src="Logo-KR.gif" alt="Keller Rolladen"/></a>
-				</div> 
-				<div class="sponsor">
-					<a href="http://www.hapag-lloyd-reisebuero.de/index.asp?Agnt=48594"><img src="hlr_herz_header_3.jpg" alt="Hapag-Lloyd Reiseb&uuml;ro"/></a>
-				</div>   
-				<div class="sponsor">
-					<a href="http://www.friseurkosmetik-fuchs.de/"><img src="fuchs.jpg" alt="Friseur- und Kosmetik G&uuml;nter Fuchs"/></a>
-				</div>   
-				<div class="sponsor">
-					<a href="http://www.maler-stephan.de/"><img src="maler-stephan.gif" alt="Maler Stephan"/></a>
-				</div>   
-			</article>
-		</section>
-	</div>
+    <noscript>Für die TCO-Magnettafel muss JavaScript aktiviert werden.</noscript>
+    <div id="root">
+        <div class="p-1"><span class="logo"><a href="https://www.tcolching.de"><img src="/images/tcoplain_0,1x.png" alt="TCO -Logo"></a></span><span class="w-75 text-center h4 align-middle ml-2"><a href="/intern/tafel/" id="appname">Turnierplaner</a> (Conny Roloff)</span>
+            <div class="small align-bottom"><span>(Wir verwenden Cookies!)</span><span class="pl-5"> <a href="/intern/logout.php">LOGOUT</a></span></div>
+        </div>
+        <div>
+            <div class="App">
+                <div class="horizontal-menu" style="display: flex; align-items: center; user-select: none;">
+                    <div class="scroll-menu-arrow scroll-menu-arrow--disabled">
+                        <div class="dateBtn arrowPicker">&lt;</div>
+                    </div>
+                    <div class="menu-wrapper" style="overflow: hidden; user-select: none;">
+                        <div class="menu-wrapper--inner" style="width: 9900px; transform: translate3d(9.15625px, 0px, 0px); transition: transform 0.4s ease 0s; white-space: nowrap; text-align: left; user-select: none;">
+                            <div class="menu-item-wrapper active" tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn aktiv">Mi., 15. Mai</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Do., 16. Mai</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Fr., 17. Mai</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Sa., 18. Mai</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">So., 19. Mai</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Mo., 20. Mai</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Di., 21. Mai</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Mi., 22. Mai</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Do., 23. Mai</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Fr., 24. Mai</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Sa., 25. Mai</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">So., 26. Mai</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Mo., 27. Mai</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Di., 28. Mai</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Mi., 29. Mai</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Do., 30. Mai</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Fr., 31. Mai</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Sa., 1. Juni</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">So., 2. Juni</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Mo., 3. Juni</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Di., 4. Juni</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Mi., 5. Juni</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Do., 6. Juni</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Fr., 7. Juni</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Sa., 8. Juni</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">So., 9. Juni</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Mo., 10. Juni</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Di., 11. Juni</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Mi., 12. Juni</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Do., 13. Juni</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Fr., 14. Juni</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Sa., 15. Juni</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">So., 16. Juni</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Mo., 17. Juni</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Di., 18. Juni</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Mi., 19. Juni</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Do., 20. Juni</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Fr., 21. Juni</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Sa., 22. Juni</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">So., 23. Juni</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Mo., 24. Juni</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Di., 25. Juni</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Mi., 26. Juni</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Do., 27. Juni</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Fr., 28. Juni</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Sa., 29. Juni</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">So., 30. Juni</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Mo., 1. Juli</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Di., 2. Juli</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Mi., 3. Juli</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Do., 4. Juli</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Fr., 5. Juli</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Sa., 6. Juli</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">So., 7. Juli</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Mo., 8. Juli</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Di., 9. Juli</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Mi., 10. Juli</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Do., 11. Juli</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Fr., 12. Juli</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Sa., 13. Juli</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">So., 14. Juli</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Mo., 15. Juli</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Di., 16. Juli</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Mi., 17. Juli</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Do., 18. Juli</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Fr., 19. Juli</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Sa., 20. Juli</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">So., 21. Juli</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Mo., 22. Juli</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Di., 23. Juli</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Mi., 24. Juli</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Do., 25. Juli</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Fr., 26. Juli</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Sa., 27. Juli</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">So., 28. Juli</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Mo., 29. Juli</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Di., 30. Juli</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Mi., 31. Juli</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Do., 1. Aug.</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Fr., 2. Aug.</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Sa., 3. Aug.</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">So., 4. Aug.</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Mo., 5. Aug.</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Di., 6. Aug.</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Mi., 7. Aug.</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Do., 8. Aug.</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Fr., 9. Aug.</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Sa., 10. Aug.</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">So., 11. Aug.</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Mo., 12. Aug.</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Di., 13. Aug.</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Mi., 14. Aug.</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Do., 15. Aug.</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Fr., 16. Aug.</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Sa., 17. Aug.</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">So., 18. Aug.</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Mo., 19. Aug.</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Di., 20. Aug.</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Mi., 21. Aug.</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Do., 22. Aug.</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Fr., 23. Aug.</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Sa., 24. Aug.</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">So., 25. Aug.</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Mo., 26. Aug.</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Di., 27. Aug.</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Mi., 28. Aug.</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Do., 29. Aug.</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Fr., 30. Aug.</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Sa., 31. Aug.</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">So., 1. Sept.</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Mo., 2. Sept.</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Di., 3. Sept.</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Mi., 4. Sept.</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Do., 5. Sept.</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Fr., 6. Sept.</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Sa., 7. Sept.</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">So., 8. Sept.</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Mo., 9. Sept.</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Di., 10. Sept.</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Mi., 11. Sept.</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Do., 12. Sept.</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Fr., 13. Sept.</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Sa., 14. Sept.</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">So., 15. Sept.</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Mo., 16. Sept.</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Di., 17. Sept.</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Mi., 18. Sept.</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Do., 19. Sept.</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Fr., 20. Sept.</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Sa., 21. Sept.</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">So., 22. Sept.</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Mo., 23. Sept.</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Di., 24. Sept.</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Mi., 25. Sept.</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Do., 26. Sept.</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Fr., 27. Sept.</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Sa., 28. Sept.</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">So., 29. Sept.</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Mo., 30. Sept.</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Di., 1. Okt.</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Mi., 2. Okt.</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Do., 3. Okt.</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Fr., 4. Okt.</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Sa., 5. Okt.</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">So., 6. Okt.</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Mo., 7. Okt.</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Di., 8. Okt.</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Mi., 9. Okt.</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Do., 10. Okt.</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Fr., 11. Okt.</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Sa., 12. Okt.</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">So., 13. Okt.</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Mo., 14. Okt.</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Di., 15. Okt.</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Mi., 16. Okt.</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Do., 17. Okt.</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Fr., 18. Okt.</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Sa., 19. Okt.</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">So., 20. Okt.</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Mo., 21. Okt.</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Di., 22. Okt.</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Mi., 23. Okt.</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Do., 24. Okt.</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Fr., 25. Okt.</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Sa., 26. Okt.</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">So., 27. Okt.</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Mo., 28. Okt.</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Di., 29. Okt.</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Mi., 30. Okt.</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Do., 31. Okt.</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Fr., 1. Nov.</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Sa., 2. Nov.</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">So., 3. Nov.</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Mo., 4. Nov.</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Di., 5. Nov.</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Mi., 6. Nov.</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Do., 7. Nov.</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Fr., 8. Nov.</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">Sa., 9. Nov.</div>
+                            </div>
+                            <div class="menu-item-wrapper " tabindex="1" role="button" style="display: inline-block;">
+                                <div class="dateBtn ">So., 10. Nov.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="scroll-menu-arrow ">
+                        <div class="dateBtn arrowPicker">&gt;</div>
+                    </div>
+                </div>
+            </div>
+            <table class="table">
+                <tbody>
+                    <tr class="platzDim">
+                        <td class="zeitleisteCol">
+                            <div class="zeitleiste">
+                                <div class="stunde"><div class="stundetext">08:00</div></div>
+                                <div class="viertelstunde"></div>
+                                <div class="viertelstunde"></div>
+                                <div class="viertelstunde"></div>
+                                <div class="stunde">09:00</div>
+                                <div class="viertelstunde"></div>
+                                <div class="viertelstunde"></div>
+                                <div class="viertelstunde"></div>
+                                <div class="stunde">10:00</div>
+                                <div class="viertelstunde"></div>
+                                <div class="viertelstunde"></div>
+                                <div class="viertelstunde"></div>
+                                <div class="stunde">11:00</div>
+                                <div class="viertelstunde"></div>
+                                <div class="viertelstunde"></div>
+                                <div class="viertelstunde"></div>
+                                <div class="stunde">12:00</div>
+                                <div class="viertelstunde"></div>
+                                <div class="viertelstunde"></div>
+                                <div class="viertelstunde"></div>
+                                <div class="stunde">13:00</div>
+                                <div class="viertelstunde"></div>
+                                <div class="viertelstunde"></div>
+                                <div class="viertelstunde"></div>
+                                <div class="stunde">14:00</div>
+                                <div class="viertelstunde"></div>
+                                <div class="viertelstunde"></div>
+                                <div class="viertelstunde"></div>
+                                <div class="stunde">15:00</div>
+                                <div class="viertelstunde"></div>
+                                <div class="viertelstunde"></div>
+                                <div class="viertelstunde"></div>
+                                <div class="stunde">16:00</div>
+                                <div class="viertelstunde"></div>
+                                <div class="viertelstunde"></div>
+                                <div class="viertelstunde"></div>
+                                <div class="stunde">17:00</div>
+                                <div class="viertelstunde"></div>
+                                <div class="viertelstunde"></div>
+                                <div class="viertelstunde"></div>
+                                <div class="stunde">18:00</div>
+                                <div class="viertelstunde"></div>
+                                <div class="viertelstunde"></div>
+                                <div class="viertelstunde"></div>
+                                <div class="stunde">19:00</div>
+                                <div class="viertelstunde"></div>
+                                <div class="viertelstunde"></div>
+                                <div class="viertelstunde"></div>
+                                <div class="stunde">20:00</div>
+                                <div class="viertelstunde"></div>
+                                <div class="viertelstunde"></div>
+                                <div class="viertelstunde"></div>
+                            </div>
+                        </td>
+                        <td id="platz1" class="platz">
+                            <div>
+                                <div class="platznummer"><span class="platzziffer rounded-circle">1</span>
+                                    <a href="/belegungsdetails/new"><img class="neuBtn p-1 rounded-circle" src="images/add.png" alt="Neue Belegung"></a>
+                                </div>
+                                <div></div>
+                            </div>
+                        </td>
+                        <td id="platz2" class="platz">
+                            <div>
+                                <div class="platznummer"><span class="platzziffer rounded-circle">2</span>
+                                    <a href="/belegungsdetails/new"><img class="neuBtn p-1 rounded-circle" src="images/add.png" alt="Neue Belegung"></a>
+                                </div>
+                                <div><a class="D-225 ts T-17-00 ts-nichtreservierbar" href="/belegungsdetails/update"><strong>17:00</strong> - frei verfügbar   </a></div>
+                            </div>
+                        </td>
+                        <td id="platz3" class="platz">
+                            <div>
+                                <div class="platznummer"><span class="platzziffer rounded-circle">3</span>
+                                    <a href="/belegungsdetails/new"><img class="neuBtn p-1 rounded-circle" src="images/add.png" alt="Neue Belegung"></a>
+                                </div>
+                                <div><a class="D-405 ts T-14-00 ts-training" href="/belegungsdetails/update"><strong>14:00</strong> - Vereinstrainer   </a></div>
+                            </div>
+                        </td>
+                        <td id="platz4" class="platz">
+                            <div>
+                                <div class="platznummer"><span class="platzziffer rounded-circle">4</span>
+                                    <a href="/belegungsdetails/new"><img class="neuBtn p-1 rounded-circle" src="images/add.png" alt="Neue Belegung"></a>
+                                </div>
+                                <div><a class="D-120 ts T-18-30 ts-training" href="/belegungsdetails/update"><strong>18:30</strong> - Herren 50 II   </a></div>
+                            </div>
+                        </td>
+                        <td id="platz5" class="platz">
+                            <div>
+                                <div class="platznummer"><span class="platzziffer rounded-circle">5</span>
+                                    <a href="/belegungsdetails/new"><img class="neuBtn p-1 rounded-circle" src="images/add.png" alt="Neue Belegung"></a>
+                                </div>
+                                <div><a class="D-120 ts T-18-30 ts-training" href="/belegungsdetails/update"><strong>18:30</strong> - Herren 50 II   </a></div>
+                            </div>
+                        </td>
+                        <td id="platz6" class="platz">
+                            <div>
+                                <div class="platznummer"><span class="platzziffer rounded-circle">6</span>
+                                    <a href="/belegungsdetails/new"><img class="neuBtn p-1 rounded-circle" src="images/add.png" alt="Neue Belegung"></a>
+                                </div>
+                                <div><a class="D-120 ts T-18-30 ts-training" href="/belegungsdetails/update"><strong>18:30</strong> - Damen   </a></div>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="container">
+                <div class="col l-turnier p-0 m-1 text-center">Turnier</div>
+                <div class="col l-punktspiele p-0 m-1 text-center">Punktspiele</div>
+                <div class="col l-training m-1 text-center">Training</div>
+                <div class="col l-nichtreservierbar p-0 m-1 text-center">Frei verfügbar / Anderes</div>
+            </div>
+        </div>
+        <footer class="blockquote-footer">(c) 2019 by Conny Roloff. Dem TC Olching zur kostenlosen Nutzung zur Verfügung gestellt.</footer>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script type="text/javascript"></script>
+    <script>
+        ! function(l) {
+            function e(e) {
+                for (var r, t, n = e[0], o = e[1], u = e[2], f = 0, i = []; f < n.length; f++) t = n[f], p[t] && i.push(p[t][0]), p[t] = 0;
+                for (r in o) Object.prototype.hasOwnProperty.call(o, r) && (l[r] = o[r]);
+                for (s && s(e); i.length;) i.shift()();
+                return c.push.apply(c, u || []), a()
+            }
 
+            function a() {
+                for (var e, r = 0; r < c.length; r++) {
+                    for (var t = c[r], n = !0, o = 1; o < t.length; o++) {
+                        var u = t[o];
+                        0 !== p[u] && (n = !1)
+                    }
+                    n && (c.splice(r--, 1), e = f(f.s = t[0]))
+                }
+                return e
+            }
+            var t = {},
+                p = {
+                    2: 0
+                },
+                c = [];
 
+            function f(e) {
+                if (t[e]) return t[e].exports;
+                var r = t[e] = {
+                    i: e,
+                    l: !1,
+                    exports: {}
+                };
+                return l[e].call(r.exports, r, r.exports, f), r.l = !0, r.exports
+            }
+            f.m = l, f.c = t, f.d = function(e, r, t) {
+                f.o(e, r) || Object.defineProperty(e, r, {
+                    enumerable: !0,
+                    get: t
+                })
+            }, f.r = function(e) {
+                "undefined" != typeof Symbol && Symbol.toStringTag && Object.defineProperty(e, Symbol.toStringTag, {
+                    value: "Module"
+                }), Object.defineProperty(e, "__esModule", {
+                    value: !0
+                })
+            }, f.t = function(r, e) {
+                if (1 & e && (r = f(r)), 8 & e) return r;
+                if (4 & e && "object" == typeof r && r && r.__esModule) return r;
+                var t = Object.create(null);
+                if (f.r(t), Object.defineProperty(t, "default", {
+                        enumerable: !0,
+                        value: r
+                    }), 2 & e && "string" != typeof r)
+                    for (var n in r) f.d(t, n, function(e) {
+                        return r[e]
+                    }.bind(null, n));
+                return t
+            }, f.n = function(e) {
+                var r = e && e.__esModule ? function() {
+                    return e.default
+                } : function() {
+                    return e
+                };
+                return f.d(r, "a", r), r
+            }, f.o = function(e, r) {
+                return Object.prototype.hasOwnProperty.call(e, r)
+            }, f.p = "/intern/tafel/";
+            var r = window.webpackJsonp = window.webpackJsonp || [],
+                n = r.push.bind(r);
+            r.push = e, r = r.slice();
+            for (var o = 0; o < r.length; o++) e(r[o]);
+            var s = n;
+            a()
+        }([])
+    </script>
+    <script src="/intern/tafel/static/js/1.c66b836a.chunk.js"></script>
+    <script src="/intern/tafel/static/js/main.526ad90a.chunk.js"></script>
 </body>
+
 </html>
